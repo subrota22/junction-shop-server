@@ -25,4 +25,21 @@ const postProduct = async (req, res) => {
   const result = await productCollection.findById(filter);
   res.status(201).send(result) ;
   }
-  module.exports = { postProduct, getAllProducts, getProduct};
+
+  //update product 
+  const updateProduct = async(req, res) => {
+  const id = req.params.id ;
+  const data = req.body;
+  const filter = {_id: id};
+  const result = await productCollection.findByIdAndUpdate(filter, data);
+  res.status(201).send(result) ;
+  }
+  //delete product 
+  const deleteProduct = async(req, res) => {
+  const id = req.params.id ;
+  const filter = {_id: id};
+  const result = await productCollection.findByIdAndDelete(filter);
+  res.status(201).send(result) ;
+  }
+
+  module.exports = { postProduct, getAllProducts, getProduct, updateProduct, deleteProduct};
